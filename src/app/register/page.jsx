@@ -56,11 +56,11 @@ export default function Signup() {
               Full Name
             </label>
             <input
-              type="text"
+              type="text-black"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               placeholder="Enter your full name"
-              className="w-full px-4 py-2 bg-white text-gray-800 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 transition"
+              className="w-full px-4 py-2 bg-grey text-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 transition"
             />
           </div>
 
@@ -73,7 +73,7 @@ export default function Signup() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="w-full px-4 py-2 bg-white text-gray-800 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 transition"
+              className="w-full px-4 py-2 bg-grey text-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 transition"
             />
           </div>
 
@@ -86,7 +86,7 @@ export default function Signup() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Create a password"
-              className="w-full px-4 py-2 bg-white text-gray-800 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 transition"
+              className="w-full px-4 py-2 bg-grey text-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 transition"
             />
           </div>
 
@@ -99,7 +99,7 @@ export default function Signup() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Re-type your password"
-              className="w-full px-4 py-2 bg-white text-gray-800 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 transition"
+              className="w-full px-4 py-2 bg-grey text-black border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 transition"
             />
           </div>
 
