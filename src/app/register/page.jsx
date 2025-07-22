@@ -42,13 +42,13 @@ export default function Signup() {
     >
       {/* Form Card */}
       <div className="relative z-10 bg-white shadow-lg rounded-lg p-8 w-full max-w-md mx-4">
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-500">
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-700">
           Sign up!
         </h2>
 
         <form onSubmit={handleRegister} className="space-y-4">
           <div>
-            <label className="block text-gray-400 font-semibold mb-1">
+            <label className="block text-gray-700 font-semibold mb-1">
               Full Name
             </label>
             <input
@@ -56,12 +56,12 @@ export default function Signup() {
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               placeholder="Enter your full name"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 hover:border-gray-400 transition duration-300"
+              className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-700 hover:border-gray-700 transition duration-300"
             />
           </div>
 
           <div>
-            <label className="block text-gray-400 font-semibold mb-1">
+            <label className="block text-gray-700 font-semibold mb-1">
               Email
             </label>
             <input
@@ -69,12 +69,12 @@ export default function Signup() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 hover:border-gray-400 transition duration-300"
+              className="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-700 hover:border-gray-700 transition duration-300"
             />
           </div>
 
           <div>
-            <label className="block text-gray-400 font-semibold mb-1">
+            <label className="block text-gray-700 font-semibold mb-1">
               Password
             </label>
             <input
@@ -82,12 +82,12 @@ export default function Signup() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Create a password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 hover:border-gray-400 transition duration-300"
+              className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-700 hover:border-gray-700 transition duration-300"
             />
           </div>
 
           <div>
-            <label className="block text-gray-400 font-semibold mb-1">
+            <label className="block text-gray-700 font-semibold mb-1">
               Confirm Password
             </label>
             <input
@@ -95,7 +95,7 @@ export default function Signup() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Re-type your password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 hover:border-gray-400 transition duration-300"
+              className="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-700 hover:border-gray-700 transition duration-300"
             />
           </div>
 
