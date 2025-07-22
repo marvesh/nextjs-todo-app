@@ -28,10 +28,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <img src="/login.svg" alt="Welcome" className="w-64 mb-6" />
+      <img src="/login.svg" alt="Welcome" className="w-38 mb-5" />
 
       <form
-        className="w-full max-w-md bg-white rounded-lg shadow-md p-8 space-y-6"
+        className="w-full max-w-md bg-white rounded-lg shadow-md p-4 space-y-2"
         onSubmit={handleLogin}
       >
         <h2 className="text-2xl font-bold text-gray-800 text-center">Login</h2>
