@@ -38,7 +38,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-100 bg-white rounded-lg shadow-lg p-6 space-y-4"
+          className="w-78 bg-white rounded-lg shadow-lg p-6 space-y-4"
           onSubmit={handleLogin}
         >
           <h2 className="text-2xl font-bold text-gray-800 text-center">Login</h2>
