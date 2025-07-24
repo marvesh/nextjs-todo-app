@@ -2,22 +2,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../../../lib/supabaseClient";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Eye, EyeOff } from "lucide-react";
 
-export default function Login() {
+export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setMessage("");
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -26,13 +22,9 @@ export default function Login() {
 
     if (error) {
       setMessage(error.message);
-      setLoading(false);
     } else {
-      setSuccess(true);
       setMessage("Login successful!");
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1500);
+      router.push("/dashboard");
     }
   };
 
@@ -45,7 +37,7 @@ export default function Login() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-80 bg-gray-900 text-white rounded-lg shadow-lg p-6 space-y-4 relative"
+          className="w-80 bg-gray-900 text-white rounded-lg shadow-lg p-6 space-y-4"
           onSubmit={handleLogin}
         >
           <h2 className="text-2xl font-bold text-center">Login</h2>
@@ -62,7 +54,6 @@ export default function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              disabled={loading || success}
             />
           </div>
 
@@ -79,13 +70,11 @@ export default function Login() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                disabled={loading || success}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute top-2 right-2 text-gray-400 hover:text-indigo-300"
-                disabled={loading || success}
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
@@ -94,62 +83,12 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-800 transition text-sm font-semibold flex items-center justify-center"
-            disabled={loading || success}
+            className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-800 transition text-sm font-semibold"
           >
-            {loading && !success && (
-              <svg
-                className="animate-spin h-5 w-5 mr-2 text-white"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                />
-              </svg>
-            )}
-            {success ? "Success!" : loading ? "Logging in..." : "Login"}
+            Login
           </button>
 
-          <AnimatePresence>
-            {success && (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0 }}
-                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-80 rounded-lg"
-              >
-                <motion.svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="text-green-400 w-16 h-16"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  initial={{ rotate: 0 }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5 13l4 4L19 7"
-                  />
-                </motion.svg>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {message && !success && (
+          {message && (
             <p className="text-center text-red-400 text-sm">{message}</p>
           )}
         </motion.form>
