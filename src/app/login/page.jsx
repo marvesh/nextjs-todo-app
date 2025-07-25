@@ -10,21 +10,34 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      setMessage("Please fill in both fields.");
+      return;
+    }
+
+    setLoading(true);
+    setMessage("");
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
+    setLoading(false);
+
     if (error) {
       setMessage(error.message);
     } else {
       setMessage("Login successful!");
-      router.push("/dashboard");
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1500);
     }
   };
 
@@ -51,9 +64,9 @@ export default function Home() {
               id="email"
               className="mt-1 block w-full rounded-md bg-gray-800 border border-gray-600 shadow-sm p-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="Enter your email"
-              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={loading}
             />
           </div>
 
@@ -67,9 +80,9 @@ export default function Home() {
                 id="password"
                 className="mt-1 block w-full rounded-md bg-gray-800 border border-gray-600 shadow-sm p-2 pr-10 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="Enter your password"
-                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
               />
               <button
                 type="button"
@@ -83,13 +96,42 @@ export default function Home() {
 
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-800 transition text-sm font-semibold"
+            disabled={loading}
+            className={`w-full flex items-center justify-center bg-indigo-600 text-white py-2 rounded-md transition text-sm font-semibold hover:bg-indigo-800 ${
+              loading ? "opacity-70 cursor-not-allowed" : ""
+            }`}
           >
-            Login
+            {loading && (
+              <svg
+                className="animate-spin h-5 w-5 mr-2 text-white"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                />
+              </svg>
+            )}
+            {loading ? "Logging in..." : "Login"}
           </button>
 
           {message && (
-            <p className="text-center text-red-400 text-sm">{message}</p>
+            <p
+              className={`text-center text-sm mt-2 ${
+                message.includes("success") ? "text-green-400" : "text-red-400"
+              }`}
+            >
+              {message}
+            </p>
           )}
         </motion.form>
       </div>
