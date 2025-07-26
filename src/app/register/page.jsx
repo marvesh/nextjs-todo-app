@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { supabase } from "../../../lib/supabaseClient";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function Signup() {
   const [fullName, setFullName] = useState("");
@@ -11,6 +13,8 @@ export default function Signup() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -96,22 +100,43 @@ export default function Signup() {
                 className="w-full px-4 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:ring-indigo-500 focus:outline-none"
                 disabled={loading}
               />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:ring-indigo-500 focus:outline-none"
-                disabled={loading}
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full px-4 py-2 bg-gray-800 text-white border border-gray-600 rounded-md focus:ring-indigo-500 focus:outline-none"
-                disabled={loading}
-              />
+
+              {/* Password with toggle */}
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-2 pr-10 bg-gray-800 text-white border border-gray-600 rounded-md focus:ring-indigo-500 focus:outline-none"
+                  disabled={loading}
+                />
+                <div
+                  className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </div>
+              </div>
+
+              {/* Confirm Password with toggle */}
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full px-4 py-2 pr-10 bg-gray-800 text-white border border-gray-600 rounded-md focus:ring-indigo-500 focus:outline-none"
+                  disabled={loading}
+                />
+                <div
+                  className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                  onClick={() => setShowConfirmPassword((prev) => !prev)}
+                >
+                  {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </div>
+              </div>
+
               <button
                 type="submit"
                 disabled={loading}
@@ -119,7 +144,14 @@ export default function Signup() {
               >
                 {loading && (
                   <svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
                     <path
                       className="opacity-75"
                       fill="currentColor"
@@ -131,6 +163,14 @@ export default function Signup() {
               </button>
 
               {message && <p className="text-sm text-center text-red-400">{message}</p>}
+
+              {/* Login Link */}
+              <div className="text-center text-sm mt-4">
+                <span className="text-gray-400">Already have an account? </span>
+                <Link href="/login" className="text-indigo-400 hover:underline">
+                  Login
+                </Link>
+              </div>
             </form>
           </>
         )}
